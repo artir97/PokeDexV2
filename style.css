@@ -1,15 +1,15 @@
 body {
     background-color: #F5F7FB;
     margin: 0;
+    font-family: Verdana, Tahoma, Monocraft, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 nav {
     background-color: #FFF;
     height: 80px;
 
-    font-family: Verdana, Tahoma, Monocraft, sans-serif;
-    font-weight: bold;
-    font-size: 24px;
     box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -27,4 +27,36 @@ nav {
 
 .nav-menu-item img {
     height: 60px;
+}
+
+
+
+
+/*POKE CARDS*/
+.poke-cards-small-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.poke-card-small {
+    box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
+    height: 250px;
+    width: 350px;
+    background-color: #FFF;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.poke-card-small img {
+    height: 200px;
 }
