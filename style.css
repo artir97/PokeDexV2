@@ -1,0 +1,30 @@
+body {
+    background-color: #F5F7FB;
+    margin: 0;
+}
+
+nav {
+    background-color: #FFF;
+    height: 80px;
+
+    font-family: Verdana, Tahoma, Monocraft, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.nav-menu-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-menu-item img {
+    height: 60px;
+}
