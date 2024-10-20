@@ -5,7 +5,9 @@ function pokeCardSmallTemplate(i) {
             <img src="${pokemon[i].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
             <div class="poke-card-small-info">
                 <div class="poke-id">N°${pokemon[i].id}</div>
-                <div>${pokemon[i].name}</div>  
+                <div class="poke-card-small-pokemon-name">
+                    ${pokemon[i].name.charAt(0).toUpperCase() + pokemon[i].name.substring(1)}
+                </div>  
                 <div class="types-container">
                     ${pokeCardSmallTypesTemplate(i)}
                 </div>
@@ -21,7 +23,7 @@ function pokeCardSmallTypesTemplate(i) {
         return (
             `
             <div class="${pokemon[i].types[0].type.name}">
-                ${pokemon[i].types[0].type.name}
+                ${pokemon[i].types[0].type.name.toUpperCase()}
             </div>
             `
         )
@@ -29,10 +31,10 @@ function pokeCardSmallTypesTemplate(i) {
         return (
             `
             <div class="${pokemon[i].types[0].type.name}">
-                ${pokemon[i].types[0].type.name}
+                ${pokemon[i].types[0].type.name.toUpperCase()}
             </div>
             <div class="${pokemon[i].types[1].type.name}">
-                ${pokemon[i].types[1].type.name}
+                ${pokemon[i].types[1].type.name.toUpperCase()}
             </div>
             `
         )
