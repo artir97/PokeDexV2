@@ -1,5 +1,5 @@
 // URLS
-const BASE_URL = 'https://pokeapi.co/api/v2/pokemon?limit=9&offset=0';
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon?limit=9&offset=386';
 let pokemonUrls = [];
 
 // variables

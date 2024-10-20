@@ -46,7 +46,7 @@ nav {
 .poke-card-small {
     box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
     height: 250px;
-    width: 350px;
+    width: 400px;
     background-color: #FFF;
 
     border-radius: 15px;
@@ -59,4 +59,17 @@ nav {
 
 .poke-card-small img {
     height: 200px;
+}
+
+.poke-card-small .types-container {
+    display: flex;
+    gap: 20px;
+}
+
+.poke-card-small .types-container div {
+    padding: 16px;
+    border-radius: 10px;
+    width: 100px;
+
+    text-align: center;
 }
