@@ -3,10 +3,11 @@ function pokeCardSmallTemplate(i) {
         `
         <div class="poke-card-small" id="poke-card-small-${i}">
             <img src="${pokemon[i].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+            <div>N°${pokemon[i].id}</div>
+            <div>${pokemon[i].name}</div>  
             <div class="types-container">
                 ${pokeCardSmallTypesTemplate(i)}
             </div>
-            <div>${pokemon[i].name}</div>
         </div>
         `
     )
