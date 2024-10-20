@@ -15,5 +15,5 @@ async function loadPokemon() {
         let response = await fetch(pokemonUrls[i]);
         pokemon[i] = await response.json();
     }
-    console.log('pokemonArray', pokemon);
+    console.log('pokemonArray', pokemon[8]);
 }

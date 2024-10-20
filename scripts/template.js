@@ -40,3 +40,51 @@ function pokeCardSmallTypesTemplate(i) {
         )
     }
 }
+
+function pokeCardBigTemplate(i) {
+    return (
+        `
+        <div class="poke-card-big-poke-info">
+            <img src="${pokemon[i].sprites.front_default}" alt="" srcset="">
+            <div>#${pokemon[i].id}</div>
+            <div>${pokemon[i].name.charAt(0).toUpperCase() + pokemon[i].name.substring(1)}</div>
+            <div>placeholder species</div>
+            <div class="types-container">
+                ${pokeCardSmallTypesTemplate(i)}
+            </div>
+            <div>
+                <div>Pokedex Entry</div>
+                <div>placeholder entry</div>
+            </div>
+            <div>
+                <div style="text-align: center">Abilites</div>
+                <div class="abilities-container">
+                    <div class="poke-info-div">ability-1</div>
+                    <div class="poke-info-div">ability-2</div>
+                </div>
+                <div>
+                    <div>
+                      <div>HEIGHT</div>
+                      <div class="poke-info-div">${pokemon[i].height + '0' + 'cm'}</div>
+                    </div>
+                    <div>
+                      <div>WEIGHT</div>
+                      <div class="poke-info-div">${pokemon[i].weight + '00' + 'g'}</div>
+                    </div>
+                    
+                    <div>
+                      <div>WEAKNESSES</div>
+                      <div class="poke-info-div">
+                        <div>weakness placeholder</div>
+                      </div>
+                    </div>
+                    <div>
+                      <div>BASE EXP</div>
+                      <div class="poke-info-div">${pokemon[i].base_experience}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+    )
+}
