@@ -34,22 +34,25 @@ nav {
 
 /*POKE CARDS*/
 .poke-cards-small-container {
-    margin-top: 20px;
+
+    margin-top: 120px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    column-gap: 40px;
+    row-gap: 96px;
 }
 
 .poke-card-small {
-    box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.2);
+    box-shadow: 0 0 16px 0 rgb(0, 0, 0, 0.15);
     height: 250px;
     width: 400px;
     background-color: #FFF;
+    padding: 16px;
 
-    border-radius: 15px;
+    border-radius: 32px;
 
     display: flex;
     flex-direction: column;
@@ -59,6 +62,14 @@ nav {
 
 .poke-card-small img {
     height: 200px;
+    margin-top: -104px;
+}
+
+.poke-card-small-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 .poke-card-small .types-container {
@@ -72,4 +83,8 @@ nav {
     width: 100px;
 
     text-align: center;
+}
+
+.poke-id {
+    color: #95959d;
 }
