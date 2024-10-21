@@ -1,7 +1,7 @@
 function pokeCardSmallTemplate(i) {
     return (
         `
-        <div class="poke-card-small" id="poke-card-small-${i}">
+        <div onclick="openPokemonCardBig(${i})" class="poke-card-small" id="poke-card-small-${i}">
             <img src="${pokemon[i].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
             <div class="poke-card-small-info">
                 <div class="poke-id">N°${pokemon[i].id}</div>
@@ -90,42 +90,48 @@ function pokeCardBigTemplate(i) {
                 <div class="stats-container" style="text-align: center">
                     <div>
                         <div>HP</div>
-                        <div>${pokemon[8].stats[0].base_stat}</div>
+                        <div>${pokemon[i].stats[0].base_stat}</div>
                     </div>
                     <div>
                         <div>ATK</div>
-                        <div>${pokemon[8].stats[1].base_stat}</div>
+                        <div>${pokemon[i].stats[1].base_stat}</div>
                     </div>
                     <div>
                         <div>DEF</div>
-                        <div>${pokemon[8].stats[2].base_stat}</div>
+                        <div>${pokemon[i].stats[2].base_stat}</div>
                     </div>
                     <div>
                         <div>SpA</div>
-                        <div>${pokemon[8].stats[3].base_stat}</div>
+                        <div>${pokemon[i].stats[3].base_stat}</div>
                     </div>
                     <div>
                         <div>SpD</div>
-                        <div>${pokemon[8].stats[4].base_stat}</div>
+                        <div>${pokemon[i].stats[4].base_stat}</div>
                     </div>
                     <div>
                         <div>SPD</div>
-                        <div>${pokemon[8].stats[5].base_stat}</div>
+                        <div>${pokemon[i].stats[5].base_stat}</div>
                     </div>
                     <div>
                         <div>TOT</div>
-                        <div>calc total</div>
+                        <div>${getTotalStats(i)}</div>
                     </div>
                 </div>
             </div>
             <div>
                 <div>EVOLUTION</div>
                 <div class="evolution-container" >
-                    <div>img</div>
+                    <div>
+                        <img src="${pokemon[6].sprites.front_default}" alt="image of pokemon ${pokemon[6].name}">
+                    </div>
                     <div>lvl</div>
-                    <div>img</div>
+                    <div>
+                        <img src="${pokemon[7].sprites.front_default}" alt="image of pokemon ${pokemon[7].name}">
+                    </div>
                     <div>lvl</div>
-                    <div>img</div>
+                    <div>
+                        <img src="${pokemon[8].sprites.front_default}" alt="image of pokemon ${pokemon[8].name}">
+                    </div>
                 </div>
             </div>
             <div>
@@ -138,4 +144,12 @@ function pokeCardBigTemplate(i) {
         </div>
         `
     )
+}
+
+function getTotalStats(pokemonIndex) {
+    let totalStats = 0;
+    for (let i = 0; i < pokemon[pokemonIndex].stats.length; i++) {
+        totalStats += pokemon[pokemonIndex].stats[i].base_stat;
+    }
+    return totalStats;
 }

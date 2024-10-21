@@ -73,6 +73,13 @@ nav {
     align-items: center;
 }
 
+.poke-card-small:hover {
+    <!-- TODO remove the scaling and adjust the responsiveness accordingly -->
+    cursor: pointer;
+    scale: 1.1;
+    transition: 0.2s;
+}
+
 .poke-card-small img {
     height: 200px;
     margin-top: -104px;
@@ -117,7 +124,7 @@ nav {
 }
 
 .poke-card-big {
-    height: 98%;
+    height: 94%;
     width: 80%;
     margin-bottom: 10px;
 
@@ -128,10 +135,16 @@ nav {
 }
 
 .poke-card-big-poke-info {
+    scale: 0.95;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+.poke-card-big-poke-info > img {
+    margin-top: -80px;
+    height: 180px;
 }
 
 .poke-info-container {
@@ -173,5 +186,6 @@ nav {
 
 .evolution-container {
     display: flex;
+    align-items: center;
     gap: 16px;
 }
