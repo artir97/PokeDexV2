@@ -12,7 +12,7 @@ async function renderPokemonCardsSmall() {
     }
 }
 
-function renderPokemonCardBig(i) {
+async function renderPokemonCardBig(i) {
     let pokemonCardBigContainer = document.getElementById('poke-card-big');
-    pokemonCardBigContainer.innerHTML = pokeCardBigTemplate(i);
+    pokemonCardBigContainer.innerHTML = await pokeCardBigTemplate(i);
 }

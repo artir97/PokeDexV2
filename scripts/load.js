@@ -11,9 +11,20 @@ async function loadPokemonUrls(){
 }
 
 async function loadPokemon() {
-    for (let i = 0; i < pokemonUrls.length; i++) {
-        let response = await fetch(pokemonUrls[i]);
-        pokemon[i] = await response.json();
+    for (let i = 0; i < 30; i++) {
+        let response1 = await fetch(pokemonUrls[i]);
+        let response2 = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + (i+1) + '/');
+        pokemon[i] = await response1.json();
+        pokemonSpecies[i] = await response2.json();
     }
-    console.log('pokemonArray', pokemon[8]);
+}
+
+async function loadPreviousPokemon(i) {
+    let response = await fetch(pokemonUrls[i-1]);
+    return await response.json();
+}
+
+async function loadNextPokemon(i){
+    let response = await fetch(pokemonUrls[i+1]);
+    return await response.json();
 }

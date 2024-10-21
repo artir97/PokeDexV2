@@ -41,14 +41,15 @@ function pokeCardSmallTypesTemplate(i) {
     }
 }
 
-function pokeCardBigTemplate(i) {
+async function pokeCardBigTemplate(i) {
     return (
         `
         <div class="poke-card-big-poke-info">
-            <img src="${pokemon[i].sprites.front_default}" alt="" srcset="">
+            <img src="${pokemon[i].sprites.other['official-artwork'].front_default}" alt="Official Artwork">
+
             <div>#${pokemon[i].id}</div>
             <div>${pokemon[i].name.charAt(0).toUpperCase() + pokemon[i].name.substring(1)}</div>
-            <div>placeholder species</div>
+            <div>${pokemonSpecies[i].genera[7].genus}</div>
             <div class="types-container">
                 ${pokeCardSmallTypesTemplate(i)}
             </div>
@@ -57,33 +58,8 @@ function pokeCardBigTemplate(i) {
                 <div>placeholder entry</div>
             </div>
             <div class="poke-info-container">
-                <div style="text-align: center">Abilites</div>
-                <div class="abilities-container">
-                    <div class="poke-info-div">ability-1</div>
-                    <div class="poke-info-div">ability-2</div>
-                </div>
-                <div class="poke-info-box">
-                    <div>
-                      <div class="info-heading">HEIGHT</div>
-                      <div class="poke-info-div">${pokemon[i].height + '0' + 'cm'}</div>
-                    </div>
-                    <div>
-                      <div class="info-heading">WEIGHT</div>
-                      <div class="poke-info-div">${pokemon[i].weight + '00' + 'g'}</div>
-                    </div>
-                </div>
-                <div class="poke-info-box">    
-                    <div>
-                      <div class="info-heading">WEAKNESSES</div>
-                      <div class="poke-info-div">
-                        <div>weakness ph</div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="info-heading">BASE EXP</div>
-                      <div class="poke-info-div">${pokemon[i].base_experience}</div>
-                    </div>
-                </div>
+                ${pokeCardBigAbilityTemplate(i)}
+                ${pokeCardBigInfoTemplate(i)}
             </div>
             <div>
                 <div class="info-heading">STATS</div>
@@ -119,37 +95,107 @@ function pokeCardBigTemplate(i) {
                 </div>
             </div>
             <div>
-                <div>EVOLUTION</div>
-                <div class="evolution-container" >
-                    <div>
-                        <img src="${pokemon[6].sprites.front_default}" alt="image of pokemon ${pokemon[6].name}">
-                    </div>
-                    <div>lvl</div>
-                    <div>
-                        <img src="${pokemon[7].sprites.front_default}" alt="image of pokemon ${pokemon[7].name}">
-                    </div>
-                    <div>lvl</div>
-                    <div>
-                        <img src="${pokemon[8].sprites.front_default}" alt="image of pokemon ${pokemon[8].name}">
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div>prev and next</div>
-                <div>
-                    <img src="${pokemon[i-1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
-                    <img src="${pokemon[i+1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
-                </div>
+                 ${await getPreviousAndNextPokemon(i)}
             </div>
         </div>
         `
     )
 }
 
-function getTotalStats(pokemonIndex) {
-    let totalStats = 0;
-    for (let i = 0; i < pokemon[pokemonIndex].stats.length; i++) {
-        totalStats += pokemon[pokemonIndex].stats[i].base_stat;
+function pokeCardBigAbilityTemplate(i) {
+    if(pokemon[i].abilities.length === 1) {
+        return (
+            `
+        <div style="text-align: center">Abilites</div>
+            <div class="abilities-container">
+            <div class="poke-info-div">${pokemon[i].abilities[0].ability.name}</div>
+        </div>
+        `
+        )
+    } else {
+        return (
+            `
+        <div style="text-align: center">Abilites</div>
+            <div class="abilities-container">
+            <div class="poke-info-div">${pokemon[i].abilities[0].ability.name}</div>
+            <div class="poke-info-div">${pokemon[i].abilities[1].ability.name}</div>
+        </div>
+        `
+        )
     }
-    return totalStats;
+
+}
+
+function pokeCardBigInfoTemplate(i) {
+    return (
+        `
+           <div class="poke-info-box">
+                <div>
+                  <div class="info-heading">HEIGHT</div>
+                  <div class="poke-info-div">${getHeightPokemon(i)}</div>
+                </div>
+                <div>
+                  <div class="info-heading">WEIGHT</div>
+                  <div class="poke-info-div">${getWeightPokemon(i)}</div>
+                </div>
+           </div>
+           <div class="poke-info-box">    
+                <div>
+                  <div class="info-heading">WEAKNESSES</div>
+                  <div class="poke-info-div">
+                    <div>weakness ph</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="info-heading">BASE EXP</div>
+                  <div class="poke-info-div">${pokemon[i].base_experience}</div>
+                </div>
+           </div>
+        `
+    )
+}
+
+function getHeightPokemon(i) {
+    return (pokemon[i].height / 10).toFixed(2) + 'm';
+}
+
+function getWeightPokemon(i) {
+    return (pokemon[i].weight / 10).toFixed(2) + 'kg';
+}
+
+async function getPreviousAndNextPokemon(i) {
+
+    if(pokemon[i-1] !== undefined && pokemon[i+1] !== undefined ){
+        return (
+        `
+        <div>prev and next</div>
+        <div>
+            <img src="${pokemon[i-1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+            <img src="${pokemon[i+1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+        </div>
+        `
+        )
+    } else if (pokemon[i-1] === undefined && pokemon[i].id === 1) {
+        return (
+            `
+            <div>next</div>
+            <div>
+                <img src="${pokemon[i+1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+            </div>
+            `
+        )
+    } else if (pokemon[i-1] === undefined || pokemon[i+1] === undefined) {
+        let nextPokemon = await loadNextPokemon(i);
+        let previousPokemon = await loadPreviousPokemon(i);
+        return (
+            `
+            <div>prev and next</div>
+            <div>
+                <img src="${previousPokemon.sprites.front_default}" alt="image of pokemon ${previousPokemon.name}">
+                <img src="${nextPokemon.sprites.front_default}" alt="image of pokemon ${nextPokemon.name}">
+            </div>
+            `
+        )
+
+    }
 }
