@@ -25,6 +25,13 @@ async function loadMorePokemon(i){
     await loadPokemon();
     await renderPokemonCardsSmall();
     await renderPokemonCardBig(i);
+
+    let smallCardContainer = document.getElementById('poke-cards-container');
+    smallCardContainer.scrollTo({
+        top: smallCardContainer.scrollHeight,
+        behavior: 'smooth'
+    });
+
 }
 
 async function loadPreviousPokemon(i) {
