@@ -11,12 +11,20 @@ async function loadPokemonUrls(){
 }
 
 async function loadPokemon() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < pokemonCount; i++) {
         let response1 = await fetch(pokemonUrls[i]);
         let response2 = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + (i+1) + '/');
         pokemon[i] = await response1.json();
         pokemonSpecies[i] = await response2.json();
     }
+}
+
+async function loadMorePokemon(i){
+    hideLoadMore();
+    pokemonCount += 5;
+    await loadPokemon();
+    await renderPokemonCardsSmall();
+    await renderPokemonCardBig(i);
 }
 
 async function loadPreviousPokemon(i) {
@@ -26,5 +34,19 @@ async function loadPreviousPokemon(i) {
 
 async function loadNextPokemon(i){
     let response = await fetch(pokemonUrls[i+1]);
+    let response2 = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + (i+1) + '/');
+    pokemonSpecies[i] = await response2.json();
     return await response.json();
+}
+
+function hideLoadMore() {
+    let loadMoreElement = document.getElementById('load-more');
+    loadMoreElement.style.display = 'none';
+
+    let loadingSpinner = document.getElementById('loading-spinner');
+    loadingSpinner.style.display = 'block';
+}
+
+async function loadTypes() {
+
 }

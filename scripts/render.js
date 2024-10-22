@@ -1,12 +1,12 @@
 
 async function renderAll() {
     await renderPokemonCardsSmall();
-    await renderPokemonCardBig(8)
+    await renderPokemonCardBig(0);
 }
 
 async function renderPokemonCardsSmall() {
     let pokeCardsSmallContainer = document.getElementById('poke-cards-container');
-
+    pokeCardsSmallContainer.innerHTML = '';
     for (let i = 0; i < pokemon.length; i++) {
         pokeCardsSmallContainer.innerHTML += pokeCardSmallTemplate(i);
     }

@@ -47,15 +47,15 @@ async function pokeCardBigTemplate(i) {
         <div class="poke-card-big-poke-info">
             <img src="${pokemon[i].sprites.front_default}" alt="Official Artwork">
 
-            <div>#${pokemon[i].id}</div>
+            <div class="pokedex-entry-text">#${pokemon[i].id}</div>
             <div>${pokemon[i].name.charAt(0).toUpperCase() + pokemon[i].name.substring(1)}</div>
-            <div>${pokemonSpecies[i].genera[7].genus}</div>
+            <div class="pokedex-entry-text">${pokemonSpecies[i].genera[7].genus}</div>
             <div class="types-container">
                 ${pokeCardSmallTypesTemplate(i)}
             </div>
             <div>
                 <div>Pokedex Entry</div>
-                <div>placeholder entry</div>
+                <div class="pokedex-entry-text">${getEnglishPokedexEntry(pokemonSpecies[i].flavor_text_entries)}</div>
             </div>
             <div class="poke-info-container">
                 ${pokeCardBigAbilityTemplate(i)}
@@ -94,7 +94,7 @@ async function pokeCardBigTemplate(i) {
                     </div>
                 </div>
             </div>
-            <div>
+            <div style="width: 100%">
                  ${await getPreviousAndNextPokemon(i)}
             </div>
         </div>
@@ -167,20 +167,27 @@ async function getPreviousAndNextPokemon(i) {
 
     if(pokemon[i-1] !== undefined && pokemon[i+1] !== undefined ){
         return (
-        `
-        <div>prev and next</div>
-        <div>
-            <img src="${pokemon[i-1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
-            <img src="${pokemon[i+1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+            `
+        <div class="previous-next-container">
+            <div onclick="showPreviousPokemon(${i-1})" class="previous-container">
+                <img class="arrow-img" style="rotate: 180deg" src="../assets/icon/arrow.png" alt="picture of arrow">
+                <img src="${pokemon[i - 1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+            </div>
+            <div class="vertical-rule"></div>
+            <div onclick="showNextPokemon(${i+1})" class="next-container">
+                <img src="${pokemon[i + 1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+                <img class="arrow-img" src="../assets/icon/arrow.png" alt="picture of arrow">
+            </div>
         </div>
         `
         )
-    } else if (pokemon[i-1] === undefined && pokemon[i].id === 1) {
+    } else if (pokemon[i - 1] === undefined && pokemon[i].id === 1) {
         return (
             `
-            <div>next</div>
-            <div>
-                <img src="${pokemon[i+1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+            <div class="previous-next-container">
+                <div onclick="showNextPokemon(${i+1})" class="next-container">
+                <img src="${pokemon[i + 1].sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+                <img class="arrow-img" src="../assets/icon/arrow.png" alt="picture of arrow">
             </div>
             `
         )
@@ -189,10 +196,30 @@ async function getPreviousAndNextPokemon(i) {
         let previousPokemon = await loadPreviousPokemon(i);
         return (
             `
-            <div>prev and next</div>
-            <div>
-                <img src="${previousPokemon.sprites.front_default}" alt="image of pokemon ${previousPokemon.name}">
-                <img src="${nextPokemon.sprites.front_default}" alt="image of pokemon ${nextPokemon.name}">
+            <div class="previous-next-container">
+                <div onclick="showPreviousPokemon(${i-1})" class="previous-container">
+                    <img class="arrow-img" style="rotate: 180deg" src="../assets/icon/arrow.png" alt="picture of arrow">
+                    <img src="${previousPokemon.sprites.front_default}" alt="image of pokemon ${pokemon[i].name}">
+                </div>
+  
+                <div id="load-more" onclick="loadMorePokemon(${i})" class="next-container">
+                    LOAD MORE
+                </div>
+             
+                <svg id="loading-spinner" style="display: none" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="23" fill="red" stroke="black" stroke-width="2"/>
+                    <path d="M 1 24 A 23 23 0 0 0 47 24 Z" fill="white" stroke="black" stroke-width="2"/>
+                    <line x1="1" y1="24" x2="47" y2="24" stroke="black" stroke-width="3"/>
+                    <circle cx="24" cy="24" r="8" fill="white" stroke="black" stroke-width="3"/>
+        
+                    <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 0 0"
+                            to="360 0 0"
+                            dur="1s"
+                            repeatCount="indefinite"/>
+                </svg>
             </div>
             `
         )
