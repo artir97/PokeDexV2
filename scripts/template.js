@@ -45,7 +45,7 @@ async function pokeCardBigTemplate(i) {
     return (
         `
         <div class="poke-card-big-poke-info">
-            <img src="${pokemon[i].sprites.other['official-artwork'].front_default}" alt="Official Artwork">
+            <img src="${pokemon[i].sprites.front_default}" alt="Official Artwork">
 
             <div>#${pokemon[i].id}</div>
             <div>${pokemon[i].name.charAt(0).toUpperCase() + pokemon[i].name.substring(1)}</div>
